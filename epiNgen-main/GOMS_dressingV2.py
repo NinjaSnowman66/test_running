@@ -5,6 +5,7 @@
 #Mostly copied from sandwich CMC
 # Also yeah the time delays don't make sense they should be longer but then it would make readability shit so I didn't
 # bother changing them from the sandwich rules
+# If I'd left myself more time I would have put in some machine interaction stuff with god_mode too
 
 
 from CMCed.production_cycle import ProductionCycle
@@ -210,7 +211,23 @@ ProceduralProductions.append({
     'report': "sock2",
 })
 # -------------------------
+def almost_finished_dressing(memories):
+    print("Just gotta get the other sock on... (almost done state)")
 
+ProceduralProductions.append({
+    'matches': {
+        'working_memory': {'focusbuffer': {'state': 'done'},
+        'visual_representation_buffer': {'underwear1': {'location': 'hamper'},
+                                         'underwear2': {'location': 'equipped'},
+                                         'shirt': {'location': 'equipped'},
+                                         'pants': {'location': 'equipped'},
+                                         'sock1': {'location': 'equipped'},
+                                         'sock2': {'location': 'desk'}}}},
+    'negations': {},
+    'utility': 15, # I feel like there's a less hacky way to do this
+    'action': almost_finished_dressing,
+    'report': "almost_finished_dressing",
+})
 
 
 def finished_dressing(memories):
